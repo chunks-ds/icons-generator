@@ -1,0 +1,31 @@
+{
+  "name": "@chunks.ds/icons-generator",
+  "version": "0.1.0",
+  "description": "Smart tools for generate icons libraries SVG sprites based and font based.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:no": "echo \"No test specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chunks-ds/icons-generator.git"
+  },
+  "keywords": [
+    "icons",
+    "sprites",
+    "svg",
+    "font"
+  ],
+  "author": "Nul Pàs <manu@lunaeme.com> (https://github.com/nulpas)",
+  "contributors": [
+    "Nul Pàs <manu@lunaeme.com> (https://github.com/nulpas)",
+    "Ángel Corral Arias <ancoar@gmail.com> (https://github.com/ancoar)",
+    "Sergio Ortega <hello@sortega.com> (https://sortega.com/work)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chunks-ds/icons-generator/issues"
+  },
+  "homepage": "https://github.com/chunks-ds/icons-generator#readme"
+}
