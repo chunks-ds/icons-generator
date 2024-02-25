@@ -24,6 +24,9 @@
     "url": "https://github.com/chunks-ds/icons-generator/issues"
   },
   "homepage": "https://github.com/chunks-ds/icons-generator#readme",
+  "bin": {
+    "ig": "./ig.js"
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   }
