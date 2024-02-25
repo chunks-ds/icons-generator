@@ -1,13 +1,8 @@
 {
   "name": "@chunks.ds/icons-generator",
-  "version": "0.1.0",
+  "version": "",
   "description": "Smart tools for generate icons libraries SVG sprites based and font based.",
   "main": "index.js",
-  "scripts": {
-    "build:webpack": "sh ./src/build.sh",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:no": "echo \"No test specified\""
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chunks-ds/icons-generator.git"
@@ -29,13 +24,7 @@
     "url": "https://github.com/chunks-ds/icons-generator/issues"
   },
   "homepage": "https://github.com/chunks-ds/icons-generator#readme",
-  "devDependencies": {
-    "@types/node": "^20.11.20",
-    "copy-webpack-plugin": "^12.0.2",
-    "ts-loader": "^9.5.1",
-    "tslib": "^2.6.2",
-    "typescript": "^5.3.3",
-    "webpack": "5.90.3",
-    "webpack-cli": "5.1.4"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
