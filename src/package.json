@@ -2,7 +2,9 @@
   "name": "@chunks.ds/icons-generator",
   "version": "",
   "description": "Smart tools for generate icons libraries SVG sprites based and font based.",
+  "type": "commonjs",
   "main": "index.js",
+  "source": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chunks-ds/icons-generator.git"
@@ -25,7 +27,7 @@
   },
   "homepage": "https://github.com/chunks-ds/icons-generator#readme",
   "bin": {
-    "ig": "./ig.js"
+    "ig": "./index.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
