@@ -33,11 +33,11 @@
   },
   "homepage": "https://github.com/chunks-ds/icons-generator#readme",
   "dependencies": {
-    "svgo": "3.2.0"
+    "svgo": "3.3.2"
   },
   "devDependencies": {
-    "@types/node": "20.11.23",
+    "@types/node": "22.5.5",
     "dotenv": "16.4.5",
-    "typescript": "5.3.3"
+    "typescript": "5.6.2"
   }
 }

@@ -8,7 +8,9 @@ import { Tools } from './tools';
 dotEnv.config();
 const tools: Tools = new Tools();
 
-const workPath: string = path.resolve(__dirname, '../../../');
+const workPath: string = path.resolve(__dirname, '../');
+const sourcePath: string = path.resolve(workPath, './tmp/source');
+const optimizedPath: string = path.resolve(workPath, './tmp/optimized');
 console.log('Work path: ' + workPath);
 
 // ###### CHECK IF ENVIRONMENT VARS EXISTS
@@ -18,27 +20,27 @@ if (!fs.existsSync(path.resolve(workPath, './.env'))) {
 
 // ###### PROCESS COMMAND ARGUMENTS
 const allArguments: string[] = process.argv;
+console.log('POLLO FRITO', allArguments);
 const mode: string | undefined = tools.checkArgumentValue('--mode', allArguments);
 const spritesFilePath: string | undefined = tools.checkArgumentValue('--sp-file-path', allArguments, false) ||
   path.resolve(workPath, './tmp/sprites.html');
 
 // ###### GET SVG FILES FROM IMAGES REPOSITORY
 try {
-  console.log(execSync('rm -rf tmp', { encoding: 'utf-8' }));
-  console.log(execSync('mkdir tmp', { encoding: 'utf-8' }));
-  console.log(execSync('mkdir tmp/optimized', { encoding: 'utf-8' }));
-  console.log(execSync('git init ./tmp', { encoding: 'utf-8' }));
-  console.log(execSync('git --git-dir=./tmp/.git config user.name ${GIT_USER}', { encoding: 'utf-8' }));
-  console.log(execSync('git --git-dir=./tmp/.git config user.email ${GIT_EMAIL}', { encoding: 'utf-8' }));
-  console.log(execSync('git --git-dir=./tmp/.git remote add origin https://${GIT_USER}:${GIT_TOKEN}@github.com/stratio-design/stratio-icons-source-files.git', { encoding: 'utf-8' }));
-  console.log(execSync('git --git-dir=./tmp/.git --work-tree=./tmp pull origin master', { encoding: 'utf-8' }));
+  console.log(execSync(`mkdir ${sourcePath}`, { encoding: 'utf-8' }));
+  console.log(execSync(`mkdir ${optimizedPath}`, { encoding: 'utf-8' }));
+  console.log(execSync(`git init ${sourcePath}`, { encoding: 'utf-8' }));
+  console.log(execSync(`git --git-dir=${sourcePath}/.git config user.name \${GIT_USER}`, { encoding: 'utf-8' }));
+  console.log(execSync(`git --git-dir=${sourcePath}/.git config user.email \${GIT_EMAIL}`, { encoding: 'utf-8' }));
+  console.log(execSync(`git --git-dir=${sourcePath}/.git remote add origin https://\${GIT_USER}:\${GIT_TOKEN}@\${GIT_REPOSITORY}`, { encoding: 'utf-8' }));
+  console.log(execSync(`git --git-dir=${sourcePath}/.git --work-tree=${sourcePath} pull origin main`, { encoding: 'utf-8' }));
 } catch (error: any) {
   console.error(`COMMAND ERROR: ${error.message}`);
 }
 
 // ###### SVG FILES OPTIMIZATION
-const svgWorkPath: string = path.resolve(workPath, './tmp/src/svg');
-const svgOptimizedPath: string = path.resolve(workPath, './tmp/optimized');
+const svgWorkPath: string = path.resolve(workPath, `${sourcePath}/src/svg`);
+const svgOptimizedPath: string = path.resolve(workPath, optimizedPath);
 const svgFiles: string[] = tools.plainListOfSvgPaths(svgWorkPath);
 for (const svg of svgFiles) {
   const fileName: string = svg.split('/').pop() as string;

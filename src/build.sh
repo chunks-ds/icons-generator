@@ -1,6 +1,17 @@
 #!/bin/bash
+WORK_DIR="./tmp"
+MODE=""
+MODE_VALUE=""
+if [ "$1" = "--mode" ]; then
+  MODE=$1
+  MODE_VALUE=$2
+fi
+echo $1
+if [[ "$1" == --mode=* ]]; then
+  MODE=$1
+fi
 
-rm -rf dist
+rm -rf "$WORK_DIR"
 
 # COMPILE TS FILES
 tsc
@@ -8,9 +19,9 @@ tsc
 # EDIT AND COPY package.json
 BUNDLE_VERSION=$( cat package.json | jq -r '.version' )
 SVGO_VERSION=$( cat package.json | jq -r '.dependencies.svgo' )
-cp ./src/package.json ./dist/temp.json
-jq -r --arg version "$BUNDLE_VERSION" '.version |= $version' ./dist/temp.json > ./dist/temp_.json
-jq -r --arg version "$SVGO_VERSION" '.dependencies.svgo |= $version' ./dist/temp_.json > ./dist/package.json
+cp ./src/package.json $WORK_DIR/temp.json
+jq -r --arg version "$BUNDLE_VERSION" '.version |= $version' $WORK_DIR/temp.json > $WORK_DIR/temp_.json
+jq -r --arg version "$SVGO_VERSION" '.dependencies.svgo |= $version' $WORK_DIR/temp_.json > $WORK_DIR/package.json
 echo ""
 echo ""
 echo "###############################################################################################"
@@ -19,9 +30,12 @@ echo "######   · svgo version: $SVGO_VERSION"
 echo "###############################################################################################"
 echo ""
 echo ""
-rm -rf ./dist/temp.json
+rm -rf $WORK_DIR/temp.json
+rm -rf $WORK_DIR/temp_.json
 
 # COPY OTHER FILES
-cp ./README.md ./dist
-cp ./LICENSE ./dist
-cp ./.npmrc ./dist
+cp ./README.md $WORK_DIR
+cp ./LICENSE $WORK_DIR
+cp ./.npmrc $WORK_DIR
+
+node $WORK_DIR/index.js "$MODE" "$MODE_VALUE"
